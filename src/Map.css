@@ -22,3 +22,184 @@
   .map__timebarButton:not(:last-child) {
     margin-right: 10px;
   }
+
+  .map__control{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+  .horizoncontrol {
+    display: flex;
+}
+
+  .horizoncontrol {
+    opacity: 1;
+    bottom: 120px;
+    transition: bottom .15s, opacity .15s;
+}
+
+.horizoncontrol {
+    z-index: 1111;
+    position: absolute;
+}
+
+.horizoncontrol__next, .horizoncontrol__previous {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #000;
+    cursor: pointer;
+    transition: transform .1s;
+    font-family: "Roboto condensed","Helvetica Neue",Helvetica,Arial,Tahoma,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 12px;
+    width: 36px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+
+  .horizoncontrol__datetimecontainer {
+    flex: 1 0 auto;
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+
+  .horizoncontrol__timegroup {
+    background-color: rgba(255,255,255,0.6);
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    margin-bottom: 1px;
+    margin-left: 2px;
+    margin-right: 2px;
+    border-radius: 2px;
+    margin-top: 0;
+    justify-content: flex-end;
+}
+
+.horizoncontrol__time:first-child {
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+.horizoncontrol__time:not(:first-child) {
+    border-left: 1px solid rgba(255,255,255,0.3);
+}
+
+.horizoncontrol__time {
+    width: 4%;
+    flex: 0 0 4%;
+    max-width: 4%;
+    display: flex;
+    height: 18px;
+    font-size: 10px;
+    letter-spacing: .05em;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-align: center;
+    cursor: pointer;
+    color: #000;
+    justify-content: center;
+    align-items: center;
+    -webkit-font-smoothing: antialiased;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.horizoncontrol__time.is-selected {
+    background-color: white;
+    color: red;
+    pointer-events: none;
+    cursor: default;
+}
+
+  .horizoncontrol__dategroup {
+    display: flex;
+    align-content: space-between;
+    margin-bottom: 0px;
+    margin-top: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.horizoncontrol__date {
+    background-color: rgba(255,255,255,0.6);
+    height: 16px;
+    margin: 2px 2px 0 2px;
+    padding: 3px 20px;
+    font-size: 12px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 2px;
+    font-family: "Roboto condensed","Helvetica Neue",Helvetica,Arial,Tahoma,sans-serif;
+    color: #000;
+    -webkit-font-smoothing: antialiased;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    flex: 1 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.horizoncontrol__date.is-selected {
+    background-color: white;
+    color: red;
+    padding: 3px 20px;
+    pointer-events: none;
+    cursor: default;
+}
+
+  .horizoncontrol__next, .horizoncontrol__previous {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #000;
+    cursor: pointer;
+    transition: transform .1s;
+    font-family: "Roboto condensed","Helvetica Neue",Helvetica,Arial,Tahoma,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 12px;
+    width: 36px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.horizoncontrol__next span, .horizoncontrol__previous span {
+    position: relative;
+    z-index: 100;
+    width: 100%;
+}
+
+.horizoncontrol__next>svg, .horizoncontrol__previous>svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.horizoncontrol__next span, .horizoncontrol__previous span {
+    position: relative;
+    z-index: 100;
+    width: 100%;
+}
