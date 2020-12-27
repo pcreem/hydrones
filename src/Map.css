@@ -1,0 +1,24 @@
+.map__container {
+    height: 500px;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 20px;
+    margin: 5vh;
+    box-shadow: 0 0 8px -4px rgba(0, 0, 0, 0.5);
+  }
+
+  .map__container .leaflet-container {
+    height: 100%;
+    border-radius: 12px;
+  }
+
+  .map__timebar {
+    margin: 0 5vh;
+    display: flex;
+    justify-content: center;
+    margin-right: 10px;
+  }
+
+  .map__timebarButton:not(:last-child) {
+    margin-right: 10px;
+  }
