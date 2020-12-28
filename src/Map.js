@@ -11,7 +11,7 @@ function Map() {
   const [timestamps, setTimestamps] = useState([])
   const [timestamp, setTimestamp] = useState(0)
   const [twentyfour, setTwentyfour] = useState([])
-
+  //https://www.xspdf.com/resolution/50298100.html
 
 
   useEffect(() => {
@@ -50,7 +50,9 @@ function Map() {
         <MapContainer center={position} zoom={12} scrollWheelZoom={false}>
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            url="http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"
+          // dark mode: http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png
+          // light mode: https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
           />
           <Marker position={position}>
             <Popup>
