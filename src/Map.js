@@ -95,7 +95,7 @@ function Map() {
             <ul class="horizoncontrol__dategroup">
               <li class="horizoncontrol__date" data-horizon="6"><span>12/27</span></li>
               <li class="horizoncontrol__date" data-horizon="30"><span>12/28</span></li>
-              <li class="horizoncontrol__date is-selected" data-horizon="54"><span>Tue, 12/29</span></li>
+              <li class="horizoncontrol__date is-selected" data-horizon="54"><span>12/29</span></li>
               <li class="horizoncontrol__date" data-horizon="78"><span>12/30</span></li>
               <li class="horizoncontrol__date" data-horizon="102"><span>12/31</span></li>
               <li class="horizoncontrol__date" data-horizon="126"><span>1/1</span></li>

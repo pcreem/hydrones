@@ -36,7 +36,7 @@
 
   .horizoncontrol {
     opacity: 1;
-    bottom: 120px;
+    top: 490px;
     transition: bottom .15s, opacity .15s;
 }
 
