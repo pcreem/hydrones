@@ -10,11 +10,12 @@ function Chart({ weekdays }) {
       <Bar
         data={{
           labels: weekdays.map(item => item.toLocaleDateString()),
-          backgroundColor: '#fff',
-          borderColor: '#fff',
+
           datasets: [{
             data: [50, 60, 70, 10, 40, 80, 90, 20, 30,],
-            borderWidth: 0.5
+            borderWidth: 0.5,
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
           }]
         }}
         width={600}
