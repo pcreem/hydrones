@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Map.css';
-import { MapContainer, Marker, Circle, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, Circle, Popup, TileLayer, LayersControl } from "react-leaflet";
 import db from './firebase';
 import { Button } from '@material-ui/core';
 
@@ -11,8 +11,6 @@ function Map() {
   const [timestamps, setTimestamps] = useState([])
   const [timestamp, setTimestamp] = useState(0)
   const [twentyfour, setTwentyfour] = useState([])
-  //https://www.xspdf.com/resolution/50298100.html
-
 
   useEffect(() => {
     db.ref('slick').once('value').then((snapshot) => {
@@ -47,13 +45,21 @@ function Map() {
   return (
     <div className="map">
       <div className="map__container">
-        <MapContainer center={position} zoom={12} scrollWheelZoom={false}>
-          <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"
-          // dark mode: http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png
-          // light mode: https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
-          />
+        <MapContainer center={position} zoom={12} scrollWheelZoom={true}>
+          <LayersControl position="topright">
+            <LayersControl.BaseLayer checked name="Light mode">
+              <TileLayer
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+            </LayersControl.BaseLayer>
+            <LayersControl.BaseLayer name="Dark mode">
+              <TileLayer
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url="http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"
+              />
+            </LayersControl.BaseLayer>
+          </LayersControl>
           <Marker position={position}>
             <Popup>
               The port of Jorg Lasfar
@@ -63,20 +69,6 @@ function Map() {
         </MapContainer>
       </div>
 
-      {/* <div className="map__timebar">
-        {timestamps?.map(item =>
-          <Button
-            className="map__timebarButton "
-            variant="contained"
-            color={`${item === timestamp && "primary"}`}
-            onClick={(e) => { setTimestamp(item) }}
-          >
-            {new Date(
-              item
-            ).toLocaleString()
-            }
-          </Button>
-        )}</div> */}
       <div className="map__control">
         <div class="horizoncontrol" id="horizoncontrol">
           <div class="horizoncontrol__previous" data-name="previous">
