@@ -3,6 +3,7 @@ import './Map.css';
 import { MapContainer, Marker, Circle, Popup, TileLayer, LayersControl } from "react-leaflet";
 import db from './firebase';
 import { Button } from '@material-ui/core';
+import { addDays } from 'date-fns';
 
 function Map() {
   const position = [33.16141, -8.629944]
@@ -11,6 +12,8 @@ function Map() {
   const [timestamps, setTimestamps] = useState([])
   const [timestamp, setTimestamp] = useState(0)
   const [twentyfour, setTwentyfour] = useState([])
+  const [weekdays, setWeekdays] = useState([])
+  const now = new Date()
 
   useEffect(() => {
     db.ref('slick').once('value').then((snapshot) => {
@@ -26,6 +29,11 @@ function Map() {
         twentyfour.push(i)
       }
       setTwentyfour(Array.from(new Set(twentyfour)))
+
+      for (let i = 0; i < 9; i++) {
+        weekdays.push(addDays(now, i))
+        setWeekdays(Array.from(new Set(weekdays)))
+      }
     });
   }, [])
 
@@ -84,18 +92,9 @@ function Map() {
               {twentyfour?.map(item =>
                 <li class="horizoncontrol__time" data-horizon="36"><span>{item}</span></li>
               )}
-              {/* <li class="horizoncontrol__time is-selected" data-horizon="54"><span>20h</span></li> */}
             </ul>
             <ul class="horizoncontrol__dategroup">
-              <li class="horizoncontrol__date" data-horizon="6"><span>12/27</span></li>
-              <li class="horizoncontrol__date" data-horizon="30"><span>12/28</span></li>
-              <li class="horizoncontrol__date is-selected" data-horizon="54"><span>12/29</span></li>
-              <li class="horizoncontrol__date" data-horizon="78"><span>12/30</span></li>
-              <li class="horizoncontrol__date" data-horizon="102"><span>12/31</span></li>
-              <li class="horizoncontrol__date" data-horizon="126"><span>1/1</span></li>
-              <li class="horizoncontrol__date" data-horizon="150"><span>1/2</span></li>
-              <li class="horizoncontrol__date" data-horizon="174"><span>1/3</span></li>
-              <li class="horizoncontrol__date" data-horizon="180"><span>1/4</span></li>
+              {weekdays?.map(day => <li class="horizoncontrol__date" data-horizon="6"><span>{day.toLocaleDateString().replace(/\/[0-9]+$/, '')}</span></li>)}
             </ul>
           </div>
           <div class="horizoncontrol__next" data-name="next">
