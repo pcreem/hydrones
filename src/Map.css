@@ -1,7 +1,3 @@
-body {
-  background-color: #282c36;
-}
-
 .map__nav {
  display: flex;
  justify-content: center;
@@ -11,11 +7,8 @@ body {
 
 .map__nav p {
   z-index: 1111;
-  
   top: 60px;
-
   margin-right: 10px;
- 
   background-color: rgba(255,255,255,0.6);
   height: 16px;
   margin: 2px 2px 0 2px;

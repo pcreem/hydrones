@@ -4,6 +4,7 @@ import Map from './Map';
 import Chart from './Chart';
 import db from './firebase';
 import { addDays } from 'date-fns';
+import List from './List';
 
 
 function App() {
@@ -13,6 +14,13 @@ function App() {
   const [timestamp, setTimestamp] = useState(0)
   const [twentyfour, setTwentyfour] = useState([])
   const [weekdays, setWeekdays] = useState([])
+  const [level, setLevel] = useState("");
+  const levels = ['Clean Water',
+    'Plastic',
+    'Light pollution',
+    'Medium - pollution',
+    'Medium + pollution',
+    'Heavy pollution'];
   const now = new Date()
 
   useEffect(() => {
@@ -50,8 +58,13 @@ function App() {
 
   }, [timestamp])
 
+  const onLevelChange = (e) => {
+    setLevel(e.target.value)
+  };
+
   return (
     <div className="app">
+      <List levels={levels} level={level} onLevelChange={onLevelChange} />
       <Map timestamp={timestamp} slick={slick} twentyfour={twentyfour} weekdays={weekdays} />
       <Chart weekdays={weekdays} />
     </div>
