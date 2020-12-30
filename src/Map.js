@@ -10,6 +10,8 @@ function Map({ timestamp, slick, twentyfour, weekdays }) {
   const [center, setCenter] = useState({ lat: 33.16141, lng: - 8.629944 })
   const [timenow, setTimenow] = useState(new Date())
   setInterval(function () { setTimenow(new Date()); }, 1000);
+  const [level, setLevel] = useState("");
+  const levels = [0, 20, 40, 60, 80, 100];
 
   const onMove = useCallback(() => {
     setCenter(map?.getCenter())
@@ -35,7 +37,9 @@ function Map({ timestamp, slick, twentyfour, weekdays }) {
             </p>
           </>
         }
-
+      </div>
+      <div className="map__level">
+        {levels?.map(item => <p onClick={(e) => { setLevel(item) }}>{item}</p>)}
       </div>
       <div className="map__container">
         <MapContainer center={position} zoom={12} scrollWheelZoom={true} whenCreated={setMap}>

@@ -7,7 +7,6 @@
 
 .map__nav p {
   z-index: 1111;
-  top: 60px;
   margin-right: 10px;
   background-color: rgba(255,255,255,0.6);
   height: 16px;
@@ -20,6 +19,32 @@
   font-family: "Roboto condensed","Helvetica Neue",Helvetica,Arial,Tahoma,sans-serif;
   color: #000;
 }
+
+.map__level {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-top: 195px;
+ margin-bottom: -330px;
+ margin-right: 7vh;
+}
+
+.map__level p {
+ z-index: 1111;
+  margin-right: 10px;
+  background-color: rgba(255,255,255,0.6);
+  height: 16px;
+  width: 70px;
+  margin-bottom: 7px;
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 2px;
+  font-family: "Roboto condensed","Helvetica Neue",Helvetica,Arial,Tahoma,sans-serif;
+  color: #000;
+}
+
 
 .map__container {
     height: 500px;
@@ -55,15 +80,9 @@
 
   .horizoncontrol {
     display: flex;
-}
-
-  .horizoncontrol {
     opacity: 1;
-    top: 490px;
+    margin-top: -25vh;
     transition: bottom .15s, opacity .15s;
-}
-
-.horizoncontrol {
     z-index: 1111;
     position: absolute;
 }

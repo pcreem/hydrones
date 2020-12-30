@@ -4,8 +4,7 @@ import Map from './Map';
 import Chart from './Chart';
 import db from './firebase';
 import { addDays } from 'date-fns';
-import List from './List';
-import { Avatar, Button, ButtonGroup, makeStyles } from '@material-ui/core';
+import { Avatar } from '@material-ui/core';
 
 function App() {
   const [slicks, setSlicks] = useState([])
@@ -14,13 +13,6 @@ function App() {
   const [timestamp, setTimestamp] = useState(0)
   const [twentyfour, setTwentyfour] = useState([])
   const [weekdays, setWeekdays] = useState([])
-  const [level, setLevel] = useState("");
-  const levels = ['Clean Water',
-    'Plastic',
-    'Light pollution',
-    'Medium - pollution',
-    'Medium + pollution',
-    'Heavy pollution'];
   const now = new Date()
 
   useEffect(() => {
@@ -58,28 +50,12 @@ function App() {
 
   }, [timestamp])
 
-  const onLevelChange = (e) => {
-    setLevel(e.target.value)
-  };
-
-  const useStyles = makeStyles((theme) => ({
-    large: {
-      width: theme.spacing(7),
-      height: theme.spacing(7),
-    },
-  }));
-
-  const classes = useStyles();
-
   return (
     <div className="app">
-      {/* <div className="app__nav">
-        <Avatar alt="Hydrones" src="https://i.ibb.co/dbw8Wdh/favicon.jpg" className={classes.large} />
-        <List level={level} levels={levels} onLevelChange={onLevelChange} />
-        <ButtonGroup variant="contained" size="small" aria-label="small primary button group">
-          {levels.map(item => <Button onClick={(e) => { setLevel(item) }}>{item}</Button>)}
-        </ButtonGroup>
-      </div> */}
+      <div className="app__avatar">
+        <Avatar alt="hyrdones" src="https://i.ibb.co/dbw8Wdh/favicon.jpg" />
+      </div>
+
       <Map timestamp={timestamp} slick={slick} twentyfour={twentyfour} weekdays={weekdays} />
       <Chart weekdays={weekdays} />
     </div>
