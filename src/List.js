@@ -13,7 +13,10 @@ function List({ level, levels, onLevelChange }) {
     formControl: {
       margin: theme.spacing(1),
       minWidth: 100,
-      backgroundColor: 'rgba(255, 255, 255, 0.8)',
+      backgroundColor: 'white',
+      marginBlock: '10px',
+      borderRadius: '5px',
+      textAlign: 'center',
     },
     selectEmpty: {
       marginTop: theme.spacing(2),

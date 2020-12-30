@@ -5,7 +5,7 @@ import Chart from './Chart';
 import db from './firebase';
 import { addDays } from 'date-fns';
 import List from './List';
-
+import { Avatar, Button, ButtonGroup, makeStyles } from '@material-ui/core';
 
 function App() {
   const [slicks, setSlicks] = useState([])
@@ -62,9 +62,24 @@ function App() {
     setLevel(e.target.value)
   };
 
+  const useStyles = makeStyles((theme) => ({
+    large: {
+      width: theme.spacing(7),
+      height: theme.spacing(7),
+    },
+  }));
+
+  const classes = useStyles();
+
   return (
     <div className="app">
-      <List levels={levels} level={level} onLevelChange={onLevelChange} />
+      {/* <div className="app__nav">
+        <Avatar alt="Hydrones" src="https://i.ibb.co/dbw8Wdh/favicon.jpg" className={classes.large} />
+        <List level={level} levels={levels} onLevelChange={onLevelChange} />
+        <ButtonGroup variant="contained" size="small" aria-label="small primary button group">
+          {levels.map(item => <Button onClick={(e) => { setLevel(item) }}>{item}</Button>)}
+        </ButtonGroup>
+      </div> */}
       <Map timestamp={timestamp} slick={slick} twentyfour={twentyfour} weekdays={weekdays} />
       <Chart weekdays={weekdays} />
     </div>
