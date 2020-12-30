@@ -53,7 +53,7 @@ function App() {
   return (
     <div className="app">
       <Map timestamp={timestamp} slick={slick} twentyfour={twentyfour} weekdays={weekdays} />
-      <Chart weekdays={weekdays}/>
+      <Chart weekdays={weekdays} />
     </div>
   );
 }

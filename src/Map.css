@@ -2,6 +2,32 @@ body {
   background-color: #282c36;
 }
 
+.map__nav {
+ display: flex;
+ justify-content: center;
+ margin-top: 60px;
+ margin-bottom: -83px;
+}
+
+.map__nav p {
+  z-index: 1111;
+  
+  top: 60px;
+
+  margin-right: 10px;
+ 
+  background-color: rgba(255,255,255,0.6);
+  height: 16px;
+  margin: 2px 2px 0 2px;
+  padding: 3px 20px;
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 2px;
+  font-family: "Roboto condensed","Helvetica Neue",Helvetica,Arial,Tahoma,sans-serif;
+  color: #000;
+}
+
 .map__container {
     height: 500px;
     background-color: white;

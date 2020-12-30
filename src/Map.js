@@ -1,14 +1,44 @@
 import './Map.css';
 import { MapContainer, Marker, Circle, Popup, TileLayer, LayersControl } from "react-leaflet";
+import React, { useState, useEffect, useCallback } from 'react';
+
 
 
 function Map({ timestamp, slick, twentyfour, weekdays }) {
   const position = [33.16141, -8.629944]
+  const [map, setMap] = useState(null)
+  const [center, setCenter] = useState({ lat: 33.16141, lng: - 8.629944 })
+  const [timenow, setTimenow] = useState(new Date())
+  setInterval(function () { setTimenow(new Date()); }, 1000);
+
+  const onMove = useCallback(() => {
+    setCenter(map?.getCenter())
+  }, [map])
+
+  useEffect(() => {
+    map?.on('move', onMove)
+    return () => {
+      map?.off('move', onMove)
+    }
+  }, [map, onMove])
 
   return (
     <div className="map">
+      <div className="map__nav">
+        {center &&
+          <>
+            <p>
+              {center.lat.toFixed(4)}, {center.lng.toFixed(4)}
+            </p>
+            <p>
+              {timenow.toLocaleString()}
+            </p>
+          </>
+        }
+
+      </div>
       <div className="map__container">
-        <MapContainer center={position} zoom={12} scrollWheelZoom={true}>
+        <MapContainer center={position} zoom={12} scrollWheelZoom={true} whenCreated={setMap}>
           <LayersControl position="topright">
             <LayersControl.BaseLayer checked name="Light mode">
               <TileLayer
