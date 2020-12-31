@@ -9,9 +9,13 @@ function Map({ timestamp, slick, twentyfour, weekdays }) {
   const [map, setMap] = useState(null)
   const [center, setCenter] = useState({ lat: 33.16141, lng: - 8.629944 })
   const [timenow, setTimenow] = useState(new Date())
-  setInterval(function () { setTimenow(new Date()); }, 1000);
   const [level, setLevel] = useState("");
-  const levels = [0, 20, 40, 60, 80, 100];
+  const levels = ['Clean Water',
+    'Plastic',
+    'Light pollution',
+    'Medium - pollution',
+    'Medium + pollution',
+    'Heavy pollution'];
 
   const onMove = useCallback(() => {
     setCenter(map?.getCenter())
@@ -23,6 +27,10 @@ function Map({ timestamp, slick, twentyfour, weekdays }) {
       map?.off('move', onMove)
     }
   }, [map, onMove])
+
+  useEffect(() => {
+    setInterval(function () { setTimenow(new Date()); }, 1000);
+  }, [])
 
   return (
     <div className="map">
