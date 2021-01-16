@@ -20,58 +20,13 @@
   color: #000;
 }
 
-.map__level {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-end;
-  margin-top: 40vh;
-  margin-bottom: -60vh;
- margin-right: 7vh;
-}
-
-.map__level p {
- z-index: 1111;
-  margin-right: 10px;
-  height: 16px;
-  width: 130px;
-  margin-bottom: 7px;
-  font-size: 12px;
-  text-align: center;
-  cursor: pointer;
-  border-radius: 2px;
-  font-family: "Roboto condensed","Helvetica Neue",Helvetica,Arial,Tahoma,sans-serif;
-  color: #000;
-   background-color: rgba(255,255,255,0.6);
-}
-
-.map__level p:first-child {
-  background-color: rgba(255,190,128,0.6);
-}
-
-.map__level p:nth-child(2) {
-  background-color: rgba(255,128,101,0.6);
-}
-
-.map__level p:nth-child(3) {
-  background-color: rgba(230,74,67,0.6);
-}
-
-.map__level p:nth-child(4) {
-  background-color: rgba(169,48,54,0.6);
-}
-
-.map__level p:nth-child(5) {
-  background-color: rgba(133,32,47,0.6);
-}
-
 
 .map__container {
     height: 500px;
     background-color: white;
     padding: 1rem;
     border-radius: 20px;
-    margin:5vh;
+    margin:0 5vh 5vh 5vh;
     box-shadow: 0 0 8px -4px rgba(0, 0, 0, 0.5);
   }
 

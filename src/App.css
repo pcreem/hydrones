@@ -5,7 +5,122 @@ body {
 .app__nav{
   display: flex;
   justify-content: space-between;
+  width: 80vw;
   align-items: center;
   margin: 5vh;
 }
 
+.app__navDatetime{
+  display: flex;
+  color: white;
+  font-size: 35px;
+}
+
+.app__navDatetime p{
+  padding-left: 20px;
+  cursor: pointer;
+}
+
+.app__navDatetime p:nth-child(3){
+  display: none;
+}
+
+.app__infoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.app__infoLeft {
+  flex: 0.9;
+}
+
+.app__infoRight {
+  flex: 0.1;
+  flex-direction: column;
+  align-self: flex-start;
+  justify-content: space-between;
+}
+
+.app__infoRightTopSwitch{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.app__infoRightTopSwitch p{
+  height: 16px;
+  width: 130px;
+  margin-bottom: 7px;
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 2px;
+  font-family: "Roboto condensed","Helvetica Neue",Helvetica,Arial,Tahoma,sans-serif;
+  color: #000;
+   background-color: rgba(255,255,255,0.6);
+}
+
+.app__infoRightTopSwitch p:first-child{
+  margin-bottom: 10px;
+}
+
+.app__level {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-top: 30vh;
+  margin-bottom: -60vh;
+ margin-right: 7vh;
+}
+
+.app__level p {
+ z-index: 1111;
+  margin-right: 10px;
+  height: 16px;
+  width: 130px;
+  margin-bottom: 7px;
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 2px;
+  font-family: "Roboto condensed","Helvetica Neue",Helvetica,Arial,Tahoma,sans-serif;
+  color: #000;
+   background-color: rgba(255,255,255,0.6);
+}
+
+.app__level p:first-child {
+  background-color: rgba(255,190,128,0.6);
+}
+
+.app__level p:nth-child(2) {
+  background-color: rgba(255,128,101,0.6);
+}
+
+.app__level p:nth-child(3) {
+  background-color: rgba(133,32,47,0.6);
+}
+
+.app__navSwitch {
+  display: none;
+}
+
+@media only screen and (max-width: 880px){
+  .app__infoRight {
+    display: none;
+  }
+
+.app__navDatetime p{
+  display: none;
+}
+
+  .app__infoLeft {
+    flex: 1;
+  }
+
+  .app__navSwitch {
+    display: true;
+    color:#fff;
+  cursor: pointer;
+  }
+}

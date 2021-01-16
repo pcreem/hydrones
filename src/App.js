@@ -16,7 +16,14 @@ function App() {
   const [weekdays, setWeekdays] = useState([])
   const [chartormap, setChartorMap] = useState("map")
   const [demoorrealtime, setDemoorRealtime] = useState("demo")
+  const [timenow, setTimenow] = useState(new Date())
   const now = new Date()
+  const [level, setLevel] = useState("");
+
+  const levels = [
+    'All',
+    'Plastic',
+    'Hydrocarbure'];
 
   useEffect(() => {
     db.ref('slick').once('value').then((snapshot) => {
@@ -32,6 +39,7 @@ function App() {
         twentyfour.push(i)
       }
       setTwentyfour(Array.from(new Set(twentyfour)))
+      setInterval(function () { setTimenow(new Date()); }, 1000);
 
       for (let i = 0; i < 9; i++) {
         weekdays.push(addDays(now, i))
@@ -59,6 +67,10 @@ function App() {
         margin: theme.spacing(0.5),
       },
     },
+    large: {
+      width: theme.spacing(7),
+      height: theme.spacing(7),
+    },
   }));
 
   const classes = useStyles();
@@ -66,18 +78,38 @@ function App() {
   return (
     <div className="app">
       <div className="app__nav">
-        <Avatar alt="hyrdones" src="https://i.ibb.co/dbw8Wdh/favicon.jpg" />
-        <div className={classes.root}>
-          <Button variant="contained" onClick={(e) => { setChartorMap(chartormap === "map" ? "chart" : "map") }}>{
+        <Avatar alt="hyrdones" src="https://i.ibb.co/dbw8Wdh/favicon.jpg" className={classes.large} />
+        <div className="app__navDatetime">
+          <p>{timenow.toLocaleDateString()}</p>
+          <p>{timenow.toLocaleTimeString()}</p>
+          <p onClick={(e) => { setChartorMap(chartormap === "map" ? "chart" : "map") }}>{
             chartormap === "map" ? "Chart" : "Map"
-          }</Button>
-          {/* <Button variant="contained" onClick={(e) => { setDemoorRealtime(demoorrealtime === "demo" ? "realtime" : "demo") }}>{
-            demoorrealtime === "demo" ? "Realtime" : "Demo"
-          }</Button> */}
+          }</p>
         </div>
-
       </div>
-      {chartormap === "map" ? <Map data={data} timestamp={timestamp} slick={slick} twentyfour={twentyfour} weekdays={weekdays} /> : <Chart data={data} weekdays={weekdays} twentyfour={twentyfour} />}
+      <div className="app__infoContainer">
+        <div className="app__infoLeft">
+          {chartormap === "map" ? <Map data={data} timestamp={timestamp} slick={slick} twentyfour={twentyfour} weekdays={weekdays} /> : <Chart data={data} weekdays={weekdays} twentyfour={twentyfour} />}
+        </div>
+        <div className="app__infoRight">
+          <div className="app__infoRightTop">
+            <div className="app__infoRightTopSwitch">
+              <p onClick={(e) => { setChartorMap(chartormap === "map" ? "chart" : "map") }}>{
+                chartormap === "map" ? "Chart" : "Map"
+              }</p>
+              <p onClick={(e) => { setDemoorRealtime(demoorrealtime === "demo" ? "realtime" : "demo") }}>{
+                demoorrealtime === "demo" ? "Realtime" : "Demo"
+              }</p>
+            </div>
+          </div>
+          <div className="app__infoRightButtom">
+            <div className="app__level">
+              {levels?.map(item => <p onClick={(e) => { setLevel(item) }}>{item}</p>)}
+            </div>
+          </div>
+        </div>
+      </div>
+
 
 
     </div>

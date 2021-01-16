@@ -1,25 +1,20 @@
 import './Map.css';
-import { MapContainer, Marker, Circle, Popup, TileLayer, LayersControl } from "react-leaflet";
-import React, { useState, useEffect, useCallback } from 'react';
+import { MapContainer, Marker, CircleMarker, Circle, FeatureGroup, Popup, TileLayer, LayersControl } from "react-leaflet";
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
 import Tooltip from '@material-ui/core/Tooltip';
 
 function Map({ timestamp, twentyfour, weekdays, data }) {
-  const position = [33.16141, -8.629944]
+  const position = [33.1250, -8.6233]
   const [map, setMap] = useState(null)
-  const [center, setCenter] = useState({ lat: 33.16141, lng: - 8.629944 })
-  const [timenow, setTimenow] = useState(new Date())
-  const [level, setLevel] = useState("");
+  const [center, setCenter] = useState({ lat: 33.1250, lng: -8.6233 })
+
   const [slick, setSlick] = useState(data[11])
   const [hour, setHour] = useState(11)
-  const levels = [
-    'Plastic',
-    'Light pollution',
-    'Medium - pollution',
-    'Medium + pollution',
-    'Heavy pollution'];
+  const mapRef = useRef()
+
 
   const onMove = useCallback(() => {
     setCenter(map?.getCenter())
@@ -31,10 +26,6 @@ function Map({ timestamp, twentyfour, weekdays, data }) {
       map?.off('move', onMove)
     }
   }, [map, onMove])
-
-  useEffect(() => {
-    setInterval(function () { setTimenow(new Date()); }, 1000);
-  }, [])
 
   useEffect(() => {
     setSlick(data[hour])
@@ -117,17 +108,14 @@ function Map({ timestamp, twentyfour, weekdays, data }) {
             <p>
               {center.lat.toFixed(4)}, {center.lng.toFixed(4)}
             </p>
-            <p>
-              {timenow.toLocaleString()}
-            </p>
           </>
         }
       </div>
-      <div className="map__level">
-        {levels?.map(item => <p onClick={(e) => { setLevel(item) }}>{item}</p>)}
-      </div>
+
       <div className="map__container">
-        <MapContainer center={position} zoom={11} scrollWheelZoom={true} whenCreated={setMap}>
+        <MapContainer ref={mapRef}
+          onzoomend={() => console.log(mapRef.current.leafletElement.getZoom())} center={position} zoom={11} scrollWheelZoom={true} whenCreated={setMap}
+        >
           <LayersControl position="topright">
             <LayersControl.BaseLayer checked name="Light mode">
               <TileLayer
@@ -147,7 +135,14 @@ function Map({ timestamp, twentyfour, weekdays, data }) {
               The port of Jorg Lasfar
           </Popup>
           </Marker>
-          {slick.length > 0 ? slick.map(item => <Circle center={[item[1], item[2]]} pathOptions={{ color: ' rgba(133,32,47,0.6)' }} radius={50} />) : null}
+          <FeatureGroup>
+            {slick.length > 0 ? slick.map(item =>
+              <>
+                <Popup>{`${item[1]},  ${item[2]}`}</Popup>
+                <Circle center={[item[1], item[2]]} pathOptions={{ color: ' rgba(133,32,47,0.6)' }} radius={130} />
+              </>
+            ) : null}
+          </FeatureGroup>
         </MapContainer>
       </div>
 
