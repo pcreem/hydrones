@@ -18,7 +18,7 @@ function App() {
   const [demoorrealtime, setDemoorRealtime] = useState("demo")
   const [timenow, setTimenow] = useState(new Date())
   const now = new Date()
-  const [level, setLevel] = useState("");
+  const [level, setLevel] = useState("All");
 
   const levels = [
     'All',
@@ -77,19 +77,20 @@ function App() {
 
   return (
     <div className="app">
-      <div className="app__nav">
-        <Avatar alt="hyrdones" src="https://i.ibb.co/dbw8Wdh/favicon.jpg" className={classes.large} />
-        <div className="app__navDatetime">
-          <p>{timenow.toLocaleDateString()}</p>
-          <p>{timenow.toLocaleTimeString()}</p>
-          <p onClick={(e) => { setChartorMap(chartormap === "map" ? "chart" : "map") }}>{
-            chartormap === "map" ? "Chart" : "Map"
-          }</p>
-        </div>
-      </div>
+
       <div className="app__infoContainer">
         <div className="app__infoLeft">
-          {chartormap === "map" ? <Map data={data} timestamp={timestamp} slick={slick} twentyfour={twentyfour} weekdays={weekdays} /> : <Chart data={data} weekdays={weekdays} twentyfour={twentyfour} />}
+          <div className="app__nav">
+            <Avatar alt="hyrdones" src="https://i.ibb.co/dbw8Wdh/favicon.jpg" className={classes.large} />
+            <div className="app__navDatetime">
+              <p>{timenow.toLocaleDateString()}</p>
+              <p>{timenow.toLocaleTimeString()}</p>
+            </div>
+          </div>
+          <div className="app__infoLeftBottom">
+            {chartormap === "map" ? <Map level={level} data={data} timestamp={timestamp} slick={slick} twentyfour={twentyfour} weekdays={weekdays} /> : <Chart data={data} weekdays={weekdays} twentyfour={twentyfour} />}
+          </div>
+
         </div>
         <div className="app__infoRight">
           <div className="app__infoRightTop">

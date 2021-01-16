@@ -6,15 +6,13 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
 import Tooltip from '@material-ui/core/Tooltip';
 
-function Map({ timestamp, twentyfour, weekdays, data }) {
+function Map({ timestamp, twentyfour, weekdays, data, level }) {
   const position = [33.1250, -8.6233]
   const [map, setMap] = useState(null)
   const [center, setCenter] = useState({ lat: 33.1250, lng: -8.6233 })
 
   const [slick, setSlick] = useState(data[11])
   const [hour, setHour] = useState(11)
-  const mapRef = useRef()
-
 
   const onMove = useCallback(() => {
     setCenter(map?.getCenter())
@@ -28,8 +26,16 @@ function Map({ timestamp, twentyfour, weekdays, data }) {
   }, [map, onMove])
 
   useEffect(() => {
-    setSlick(data[hour])
-  }, [hour])
+    if (level === "All") {
+      setSlick(data[hour])
+    }
+    else if (level === "Plastic") {
+      setSlick(data[hour].filter(item => item[3] === 20))
+    }
+    else {
+      setSlick(data[hour].filter(item => item[3] === 100))
+    }
+  }, [hour, level])
 
   const decreaseHour = (() => {
     return hour === 0 ? null : setHour(hour - 1)
@@ -113,9 +119,7 @@ function Map({ timestamp, twentyfour, weekdays, data }) {
       </div>
 
       <div className="map__container">
-        <MapContainer ref={mapRef}
-          onzoomend={() => console.log(mapRef.current.leafletElement.getZoom())} center={position} zoom={11} scrollWheelZoom={true} whenCreated={setMap}
-        >
+        <MapContainer center={position} zoom={11} scrollWheelZoom={true} whenCreated={setMap}>
           <LayersControl position="topright">
             <LayersControl.BaseLayer checked name="Light mode">
               <TileLayer

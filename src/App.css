@@ -4,10 +4,11 @@ body {
 
 .app__nav{
   display: flex;
+  flex:0.9;
   justify-content: space-between;
-  width: 80vw;
   align-items: center;
   margin: 5vh;
+  padding-bottom: 5vh;
 }
 
 .app__navDatetime{
@@ -18,7 +19,6 @@ body {
 
 .app__navDatetime p{
   padding-left: 20px;
-  cursor: pointer;
 }
 
 .app__navDatetime p:nth-child(3){
@@ -37,8 +37,9 @@ body {
 .app__infoRight {
   flex: 0.1;
   flex-direction: column;
-  align-self: flex-start;
-  justify-content: space-between;
+  align-self: center;
+  justify-content: center;
+ align-items: center;
 }
 
 .app__infoRightTopSwitch{
@@ -69,8 +70,7 @@ body {
   flex-direction: column;
   align-items: flex-end;
   justify-content: flex-end;
-  margin-top: 30vh;
-  margin-bottom: -60vh;
+  margin-top: 30px;
  margin-right: 7vh;
 }
 
