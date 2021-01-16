@@ -50,7 +50,7 @@ function Map({ timestamp, twentyfour, weekdays, data }) {
 
   const useStyles = makeStyles((theme) => ({
     root: {
-      width: 300 + theme.spacing(3) * 2,
+      width: '70vw',
     },
     margin: {
       height: theme.spacing(3),
