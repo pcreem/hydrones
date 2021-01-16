@@ -71,9 +71,9 @@ function App() {
           <Button variant="contained" onClick={(e) => { setChartorMap(chartormap === "map" ? "chart" : "map") }}>{
             chartormap === "map" ? "Chart" : "Map"
           }</Button>
-          <Button variant="contained" onClick={(e) => { setDemoorRealtime(demoorrealtime === "demo" ? "realtime" : "demo") }}>{
+          {/* <Button variant="contained" onClick={(e) => { setDemoorRealtime(demoorrealtime === "demo" ? "realtime" : "demo") }}>{
             demoorrealtime === "demo" ? "Realtime" : "Demo"
-          }</Button>
+          }</Button> */}
         </div>
 
       </div>

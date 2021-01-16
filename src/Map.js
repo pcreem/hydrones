@@ -1,6 +1,10 @@
 import './Map.css';
 import { MapContainer, Marker, Circle, Popup, TileLayer, LayersControl } from "react-leaflet";
 import React, { useState, useEffect, useCallback } from 'react';
+import PropTypes from 'prop-types';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+import Slider from '@material-ui/core/Slider';
+import Tooltip from '@material-ui/core/Tooltip';
 
 function Map({ timestamp, twentyfour, weekdays, data }) {
   const position = [33.16141, -8.629944]
@@ -8,8 +12,8 @@ function Map({ timestamp, twentyfour, weekdays, data }) {
   const [center, setCenter] = useState({ lat: 33.16141, lng: - 8.629944 })
   const [timenow, setTimenow] = useState(new Date())
   const [level, setLevel] = useState("");
-  const [slick, setSlick] = useState(data[0])
-  const [hour, setHour] = useState(0)
+  const [slick, setSlick] = useState(data[11])
+  const [hour, setHour] = useState(11)
   const levels = [
     'Plastic',
     'Light pollution',
@@ -33,8 +37,6 @@ function Map({ timestamp, twentyfour, weekdays, data }) {
   }, [])
 
   useEffect(() => {
-    console.log(slick)
-    console.log(data[hour])
     setSlick(data[hour])
   }, [hour])
 
@@ -46,6 +48,66 @@ function Map({ timestamp, twentyfour, weekdays, data }) {
     return hour === 23 ? null : setHour(hour + 1)
   })
 
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      width: 300 + theme.spacing(3) * 2,
+    },
+    margin: {
+      height: theme.spacing(3),
+    },
+  }));
+
+  function ValueLabelComponent(props) {
+    const { children, open, value } = props;
+
+    return (
+      <Tooltip open={open} enterTouchDelay={0} placement="top" title={value}>
+        {children}
+      </Tooltip>
+    );
+  }
+
+  ValueLabelComponent.propTypes = {
+    children: PropTypes.element.isRequired,
+    open: PropTypes.bool.isRequired,
+    value: PropTypes.number.isRequired,
+  };
+
+  const PrettoSlider = withStyles({
+    root: {
+      color: '#52af77',
+      height: 8,
+    },
+    thumb: {
+      height: 24,
+      width: 24,
+      backgroundColor: '#fff',
+      border: '2px solid currentColor',
+      marginTop: -8,
+      marginLeft: -12,
+      '&:focus, &:hover, &$active': {
+        boxShadow: 'inherit',
+      },
+    },
+    active: {},
+    valueLabel: {
+      left: 'calc(-50% + 4px)',
+    },
+    track: {
+      height: 8,
+      borderRadius: 4,
+    },
+    rail: {
+      height: 8,
+      borderRadius: 4,
+    },
+  })(Slider);
+
+  const classes = useStyles();
+
+  const updateRange = (e, data) => {
+    setHour(data)
+  }
 
   return (
     <div className="map">
@@ -65,7 +127,7 @@ function Map({ timestamp, twentyfour, weekdays, data }) {
         {levels?.map(item => <p onClick={(e) => { setLevel(item) }}>{item}</p>)}
       </div>
       <div className="map__container">
-        <MapContainer center={position} zoom={12} scrollWheelZoom={true} whenCreated={setMap}>
+        <MapContainer center={position} zoom={11} scrollWheelZoom={true} whenCreated={setMap}>
           <LayersControl position="topright">
             <LayersControl.BaseLayer checked name="Light mode">
               <TileLayer
@@ -117,6 +179,12 @@ function Map({ timestamp, twentyfour, weekdays, data }) {
                 fill="#fff" opacity="0.7" fill-rule="evenodd"></path>
             </svg>
           </div>
+        </div>
+      </div>
+
+      <div className="map__slideContainer">
+        <div className={`${classes.root} map__slider`}>
+          <PrettoSlider valueLabelDisplay="on" aria-label="pretto slider" max={23} value={hour} onChange={updateRange} />
         </div>
       </div>
 

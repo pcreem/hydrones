@@ -266,6 +266,11 @@
     width: 100%;
 }
 
+.map__slider {
+  display: none;
+}
+
+
 @media only screen and (max-width: 880px){
   .map__control  {
     display: none;
@@ -278,4 +283,19 @@
   .map__nav p:nth-child(2){
      display: none;
   }
+
+  .map__slideContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .map__slider{
+    display: flex;
+    opacity: 1;
+    margin-top: -25vh;
+    transition: bottom .15s, opacity .15s;
+    z-index: 1111;
+    position: absolute;
+}
 }
