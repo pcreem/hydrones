@@ -2,15 +2,15 @@ import './Map.css';
 import { MapContainer, Marker, Circle, Popup, TileLayer, LayersControl } from "react-leaflet";
 import React, { useState, useEffect, useCallback } from 'react';
 
-
-
-function Map({ timestamp, slick, twentyfour, weekdays }) {
+function Map({ timestamp, twentyfour, weekdays, data }) {
   const position = [33.16141, -8.629944]
   const [map, setMap] = useState(null)
   const [center, setCenter] = useState({ lat: 33.16141, lng: - 8.629944 })
   const [timenow, setTimenow] = useState(new Date())
   const [level, setLevel] = useState("");
-  const levels = ['Clean Water',
+  const [slick, setSlick] = useState(data[0])
+  const [hour, setHour] = useState(0)
+  const levels = [
     'Plastic',
     'Light pollution',
     'Medium - pollution',
@@ -31,6 +31,21 @@ function Map({ timestamp, slick, twentyfour, weekdays }) {
   useEffect(() => {
     setInterval(function () { setTimenow(new Date()); }, 1000);
   }, [])
+
+  useEffect(() => {
+    console.log(slick)
+    console.log(data[hour])
+    setSlick(data[hour])
+  }, [hour])
+
+  const decreaseHour = (() => {
+    return hour === 0 ? null : setHour(hour - 1)
+  })
+
+  const increaseHour = (() => {
+    return hour === 23 ? null : setHour(hour + 1)
+  })
+
 
   return (
     <div className="map">
@@ -70,13 +85,13 @@ function Map({ timestamp, slick, twentyfour, weekdays }) {
               The port of Jorg Lasfar
           </Popup>
           </Marker>
-          {timestamp && slick?.map(item => <Circle center={item} pathOptions={{ color: 'red' }} radius={50} />)}
+          {slick.length > 0 ? slick.map(item => <Circle center={[item[1], item[2]]} pathOptions={{ color: ' rgba(133,32,47,0.6)' }} radius={50} />) : null}
         </MapContainer>
       </div>
 
       <div className="map__control">
-        <div class="horizoncontrol" id="horizoncontrol">
-          <div class="horizoncontrol__previous" data-name="previous">
+        <div className="horizoncontrol" id="horizoncontrol">
+          <div className="horizoncontrol__previous" data-name="previous" onClick={(e) => { decreaseHour() }}>
             <span>-1h</span>
             <svg width="36" height="47" viewBox="0 0 36 47" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -84,17 +99,17 @@ function Map({ timestamp, slick, twentyfour, weekdays }) {
                 fill="#fff" opacity="0.7" fill-rule="evenodd"></path>
             </svg>
           </div>
-          <div class="horizoncontrol__datetimecontainer">
-            <ul class="horizoncontrol__timegroup ">
+          <div className="horizoncontrol__datetimecontainer">
+            <ul className="horizoncontrol__timegroup ">
               {twentyfour?.map(item =>
-                <li class="horizoncontrol__time" data-horizon="36"><span>{item}</span></li>
+                <li className={`horizoncontrol__time ${hour === item && "is-selected"}`} data-horizon="36" onClick={(e) => { setHour(item) }}><span>{item}</span></li>
               )}
             </ul>
-            <ul class="horizoncontrol__dategroup">
-              {weekdays?.map(day => <li class="horizoncontrol__date" data-horizon="6"><span>{day.toLocaleDateString().replace(/\/[0-9]+$/, '')}</span></li>)}
+            <ul className="horizoncontrol__dategroup">
+              {weekdays?.map(day => <li className="horizoncontrol__date" data-horizon="6"><span>{day.toLocaleDateString().replace(/\/[0-9]+$/, '')}</span></li>)}
             </ul>
           </div>
-          <div class="horizoncontrol__next" data-name="next">
+          <div className="horizoncontrol__next" data-name="next" onClick={(e) => { increaseHour() }}>
             <span>+1h</span>
             <svg width="36" height="47" viewBox="0 0 36 47" xmlns="http://www.w3.org/2000/svg">
               <path

@@ -3,16 +3,17 @@ import { Bar } from "react-chartjs-2";
 import numeral from "numeral";
 import './Chart.css'
 
-function Chart({ weekdays }) {
+function Chart({ weekdays, twentyfour, data }) {
 
   return (
     <div className="chart">
       <Bar
         data={{
-          labels: weekdays.map(item => item.toLocaleDateString()),
+          // labels: weekdays.map(item => item.toLocaleDateString()),
+          labels: twentyfour.map(item => item),
 
           datasets: [{
-            data: [50, 60, 70, 10, 40, 80, 90, 20, 30,],
+            data: data.map(item => item.length),
             borderWidth: 0.5,
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             borderColor: 'rgba(54, 162, 235, 1)',
@@ -21,6 +22,10 @@ function Chart({ weekdays }) {
         width={600}
         height={400}
         options={{
+          title: {
+            display: true,
+            text: weekdays[0].toLocaleDateString()
+          },
           maintainAspectRatio: false,
           responsive: true,
           legend: {

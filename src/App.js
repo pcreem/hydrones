@@ -4,7 +4,8 @@ import Map from './Map';
 import Chart from './Chart';
 import db from './firebase';
 import { addDays } from 'date-fns';
-import { Avatar } from '@material-ui/core';
+import { Avatar, Button, makeStyles } from '@material-ui/core';
+import data from './data.json';
 
 function App() {
   const [slicks, setSlicks] = useState([])
@@ -13,6 +14,8 @@ function App() {
   const [timestamp, setTimestamp] = useState(0)
   const [twentyfour, setTwentyfour] = useState([])
   const [weekdays, setWeekdays] = useState([])
+  const [chartormap, setChartorMap] = useState("map")
+  const [demoorrealtime, setDemoorRealtime] = useState("demo")
   const now = new Date()
 
   useEffect(() => {
@@ -50,14 +53,33 @@ function App() {
 
   }, [timestamp])
 
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      '& > *': {
+        margin: theme.spacing(0.5),
+      },
+    },
+  }));
+
+  const classes = useStyles();
+
   return (
     <div className="app">
-      <div className="app__avatar">
+      <div className="app__nav">
         <Avatar alt="hyrdones" src="https://i.ibb.co/dbw8Wdh/favicon.jpg" />
-      </div>
+        <div className={classes.root}>
+          <Button variant="contained" onClick={(e) => { setChartorMap(chartormap === "map" ? "chart" : "map") }}>{
+            chartormap === "map" ? "Chart" : "Map"
+          }</Button>
+          <Button variant="contained" onClick={(e) => { setDemoorRealtime(demoorrealtime === "demo" ? "realtime" : "demo") }}>{
+            demoorrealtime === "demo" ? "Realtime" : "Demo"
+          }</Button>
+        </div>
 
-      <Map timestamp={timestamp} slick={slick} twentyfour={twentyfour} weekdays={weekdays} />
-      <Chart weekdays={weekdays} />
+      </div>
+      {chartormap === "map" ? <Map data={data} timestamp={timestamp} slick={slick} twentyfour={twentyfour} weekdays={weekdays} /> : <Chart data={data} weekdays={weekdays} twentyfour={twentyfour} />}
+
+
     </div>
   );
 }
